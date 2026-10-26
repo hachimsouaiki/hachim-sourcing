@@ -1,10 +1,10 @@
 import './globals.css';
 export const metadata = {
   metadataBase: new URL('https://hachimsouaiki.com'),
-  title: 'China Sourcing Consultant for Mechanical Parts | Hachim Souaiki',
-  description: 'Source mechanical parts and industrial equipment from China with a clear supplier selection process. Book a free 30-minute sourcing consultation with Hachim Souaiki.',
+  title: 'China Mechanical Parts Sourcing | Hachim Souaiki',
+  description: 'Source mechanical components, CNC parts and industrial spares from China. Supplier research, quotation comparison and coordination with Hachim Souaiki.',
   alternates: { canonical: '/' },
-  openGraph: { title: 'Source from China. Make your next move with confidence.', description: 'Mechanical parts, industrial equipment and a clearer sourcing process. Talk to Hachim Souaiki.', url: 'https://hachimsouaiki.com', siteName: 'Hachim Souaiki', locale: 'en_US', type: 'website' },
+  openGraph: { title: 'Your mechanical parts sourcing partner in China.', description: 'Find Chinese manufacturers, compare technical quotations and coordinate your mechanical parts sourcing project with Hachim Souaiki.', url: 'https://hachimsouaiki.com', siteName: 'Hachim Souaiki', locale: 'en_US', type: 'website' },
   robots: { index: true, follow: true }
 };
 export default function Layout({children}) { return <html lang="en"><body>{children}</body></html>; }
