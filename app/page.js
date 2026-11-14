@@ -1,67 +1,31 @@
-import Navigation from './navigation';
-import EnquiryForm from './enquiry-form';
-import HeroTitle from './hero-title';
-import CookieNotice from './cookie-notice';
-import WhatsAppWidget, { WhatsAppIcon } from './whatsapp-widget';
-import { whatsapp, booking, email, socialProfiles, services, faqs } from './site-content';
+import Icon from "./line-icon";
+import { Hero, SourcingBand, ProjectNeeds, ServiceOverview, Evaluation, Process, WorkingTogether, About, SamplePreview, Faq, Enquiry } from './sourcing-sections';
+import InsightCards from './insight-cards';
 
-function Arrow(){return <span aria-hidden="true">↗</span>}
-function Camera(){return <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true"><path d="M6 12h8l3-4h7l3 4h7v22H6z"/><circle cx="20" cy="23" r="7"/><path d="M29 17h2"/></svg>}
-const stockPhotos={'04':['drawing','Technical drawing and measurement ruler'],'05':['parts','Precision metal gears'],'06':['cnc','CNC milling a metal component'],'07':['gears','Transmission gears and industrial components'],'08':['factory','Metal lathe in operation'],'09':['cnc','Illustrative CNC manufacturing environment — not a portrait of Hachim'],'10':['factory','Industrial lathe and manufacturing equipment'],'11':['drawing','Technical drawing and document review']};
-function PhotoSlot({label,number,shape='landscape',className=''}){const [file,alt]=stockPhotos[number];return <div className={`photo-slot stock-photo ${shape} ${className}`}><img src={`/images/${file}.webp`} alt={alt} loading="lazy" decoding="async" width="1200" height="1000"/>{number==='09'&&<span className="stock-caption">Illustrative manufacturing photograph</span>}</div>}
-function SectionIntro({eyebrow,title,copy,center=false}){return <div className={`section-intro ${center?'center':''}`}><p className="eyebrow">{eyebrow}</p><h2>{title}</h2>{copy&&<p className="intro-copy">{copy}</p>}</div>}
-function SocialLinks(){return <div className="social-links">{socialProfiles.map(s=><a key={s.name} href={s.url} target={s.url==='#'?undefined:'_blank'} rel={s.url==='#'?undefined:'noopener noreferrer'}><span className="social-mark">{s.mark==='wa'?<WhatsAppIcon/>:s.mark==='ig'?<Camera/>:s.mark}</span><span>{s.name}</span><Arrow/></a>)}</div>}
-
-const categories=[['Custom mechanical components','Source to your drawing, material, tolerances and required finish.','Machined component close-up'],['CNC-machined parts','Find turning and milling capabilities suited to the geometry and production quantity.','CNC machining in progress'],['Industrial spare parts','Research replacement components using part references, dimensions and application requirements.','Industrial component selection'],['Fabricated & cast components','Compare manufacturing capabilities for metal assemblies, castings and tooling requirements.','Fabricated metal assembly']];
-const steps=[['Share your requirements','Send a drawing reference, part number, specification or sample description, with the quantity and destination.','Your sourcing brief'],['Define the scope','Agree the work, deliverables, timeline, fee and responsibilities before the project begins.','A written proposal'],['Research suppliers','Identify potential Chinese manufacturers against your technical and commercial requirements.','A supplier shortlist'],['Compare & assess','Review available quotations, capabilities, lead times and the questions that still need answers.','A documented comparison'],['Decide how to proceed','Review the findings and choose whether to seek verification, request samples or proceed with a supplier.','Recommended next steps']];
-
-export default function Home(){return <>
- <a className="skip" href="#main">Skip to content</a><Navigation/>
- <main id="main">
-  <section className="hero shell">
-   <p className="badge"><span className="status-dot"/> CHINA MECHANICAL PARTS SOURCING</p>
-   <HeroTitle/>
-   <p className="hero-copy">Find Chinese manufacturers for your mechanical components, compare technical<br className="desktop-break"/> and commercial quotations, and coordinate your sourcing project.<br className="desktop-break"/> Make your purchasing decision with the requirements, options and risks in view.</p>
-   <div className="actions"><a className="button" href="#enquiry">Discuss Your Project <Arrow/></a><a className="button secondary" href="#process">How It Works <span aria-hidden="true">↓</span></a></div>
-   <p className="hero-reassurance">Mechanical Components · Custom Parts · Industrial Spare Parts</p>
-   <div className="hero-cards">
-    {[["Supplier Discovery","Find manufacturers","for your parts.","discovery","Components & manufacturing"],["Supplier Assessment","Compare suppliers,","specifications & quotes.","assessment","Drawing & quotation review"],["Sourcing Coordination","Coordinate samples","& supplier follow-up.","coordination","Supplier communication"]].map(([label,line1,line2,tone,photo],i)=><a className={`hero-card ${tone}`} href={`#${tone}`} key={tone}><div className="hero-card-top"><span>0{i+1} / {label.toUpperCase()}</span><span className="card-arrow"><Arrow/></span></div><h2>{line1}<br/>{line2}</h2><div className="hero-photo"><img src={`/images/${{discovery:"cnc",assessment:"drawing",coordination:"gears"}[tone]}.webp`} alt={photo} width="800" height="450" loading="lazy" decoding="async"/></div><span className="card-caption">Explore the service <Arrow/></span></a>)}
-   </div>
-  </section>
-
-  <section className="audience-strip shell" aria-label="Who I help"><p>WHO I HELP</p><div><span><strong>Manufacturers</strong><small>Custom parts & alternative suppliers</small></span><span><strong>Maintenance companies</strong><small>Replacement industrial components</small></span><span><strong>Workshops</strong><small>Machining, fabrication & tooling</small></span><span><strong>Purchasing teams</strong><small>Supplier and quotation comparison</small></span></div></section>
-
-  <section className="section shell problem-section">
-   <div className="problem-visual"><PhotoSlot number="04" label="Technical drawing, component & workshop" shape="portrait"/><div className="visual-note"><span className="note-dot"/> Technical requirements.<br/><strong>Documented supplier comparisons.</strong></div></div>
-   <div><SectionIntro eyebrow="SOURCING SUPPORT FOR INDUSTRIAL BUYERS" title={<>Know what you’re comparing.<br/>Before you choose a supplier.</>} copy="A competitive price is only useful when the material, tolerances, process and delivery terms match your requirement. I help you identify these differences before you make a purchasing decision."/>
-    <div className="benefit-list">{[['01','Translate the requirement into a sourcing brief','Organize the drawing revision, material, dimensions, quantities and technical questions suppliers need to answer.'],['02','Compare suppliers on the same basis','Review capabilities, quotations, tooling costs, lead times and available documents against your agreed criteria.'],['03','Resolve questions through supplier communication','Coordinate clarifications in Chinese and record the answers, outstanding issues and actions needed before ordering.']].map(([n,title,copy])=><div key={n}><span>{n}</span><div><h3>{title}</h3><p>{copy}</p></div></div>)}</div>
-    <a className="text-link" href="#example">View the sample sourcing report <Arrow/></a>
-   </div>
-  </section>
-
-  <section id="expertise" className="section section-tint"><div className="shell"><div className="section-top"><SectionIntro eyebrow="WHAT I HELP YOU SOURCE" title={<>Mechanical components<br/>from Chinese manufacturers.</>} copy="Custom production or a replacement component: the sourcing approach starts with your part’s function, specifications and purchasing requirements."/><a className="text-link" href="#enquiry">Discuss your requirement <Arrow/></a></div><div className="category-grid">{categories.map(([title,copy,photo],i)=><article key={title}><PhotoSlot number={`0${i+5}`} label={photo}/><h3>{title}</h3><p>{copy}</p></article>)}</div><p className="section-footnote">Selected industrial machinery and tooling projects can also be discussed after reviewing the application and scope.</p></div></section>
-
-  <section id="services" className="section shell"><SectionIntro center eyebrow="CHINA INDUSTRIAL SOURCING SERVICES" title={<>Find suppliers. Assess options.<br/>Coordinate your purchase.</>} copy="Choose support for the stage you are at. Each service has defined deliverables, a fee agreed in advance and clear responsibilities."/>
-   <div className="service-grid">{services.map(s=><article id={s.id} key={s.id} className={s.id==='assessment'?'featured':''}><div className="service-top"><span>{s.number}</span><p>{s.title}</p></div><h3>{s.headline}</h3><p className="service-intro">{s.intro}</p><ul className="check-list">{s.items.map(item=><li key={item}>{item}</li>)}</ul><div className="service-output"><span>YOUR PROJECT DELIVERABLES</span><p>{s.output}</p></div><p className="service-model">{s.model}</p><a className="button secondary" href="#enquiry">Discuss this service <Arrow/></a></article>)}</div>
-   <div className="scope-note"><span>A defined role in your supply chain.</span><p>Independent inspection, certification, customs, freight forwarding and legal advice are separate specialist services.</p></div>
-  </section>
-
-  <section id="process" className="section shell"><SectionIntro center eyebrow="HOW IT WORKS" title="Your sourcing project, step by step." copy="From the initial requirement to a documented recommendation, you know what work is being done and what information you will receive."/><div className="steps">{steps.map(([title,copy,result],i)=><article key={title}><div className="step-top"><span className="step-number">0{i+1}</span><span className="step-line"/></div><h3>{title}</h3><p>{copy}</p><span className="step-result">{result}</span></article>)}</div><p className="process-note">You stay in control of the purchasing decision. Research and supplier comparisons do not guarantee quality, reliability or compliance.</p></section>
-
-  <section id="about" className="section founder-section"><div className="shell founder-layout"><div className="founder-photos"><PhotoSlot number="09" label="Hachim — professional portrait" shape="portrait"/><div className="founder-caption"><strong>Hachim Souaiki</strong><span>Mechanical engineering student & sourcing support</span></div></div><div><SectionIntro eyebrow="WHY WORK WITH ME" title="Meet Hachim Souaiki." copy="I combine a mechanical engineering background with Chinese-language experience to help industrial buyers structure sourcing projects and communicate with manufacturers."/><p className="founder-bio">I’m a final-year mechanical engineering student. Internships in mechanical engineering and industrial departments have given me exposure to manufacturing processes, mechanical components and production environments.</p><p className="founder-bio">My initial focus is helping Moroccan companies source mechanical components from China. I work directly with you to understand the technical need, compare the information available and identify questions to resolve before purchasing.</p><div className="founder-strengths"><span>Technical requirements and manufacturing processes</span><span>Chinese-language supplier communication</span><span>Structured comparisons, clear scope and documented findings</span></div><p className="language-line">Let’s speak your language.<br/><strong>Arabic · French · English · Chinese</strong></p><a className="button" href={whatsapp} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/>Start a conversation <Arrow/></a></div></div></section>
-
-  <section id="example" className="section report-section"><div className="shell report-layout"><div><SectionIntro eyebrow="ILLUSTRATIVE SOURCING PROJECT" title={<>Sourcing a custom<br/>CNC-machined component.</>} copy="See how a sourcing report can organize your requirement, compare supplier information and identify what still needs to be confirmed."/><div className="deliverable-tags"><span>Supplier shortlist</span><span>Quote comparison</span><span>Open questions</span><span>Next steps</span></div><p className="report-description">For this illustrative CNC housing, the comparison would cover material grade, critical tolerances, machining capabilities, surface finish and order quantity. Supplier responses would then be assessed for quotation scope, tooling costs, lead time and unresolved technical questions.</p><a className="text-link" href="#enquiry">Discuss the deliverables for your project <Arrow/></a></div><div className="report-preview"><div className="report-header"><span className="brand-mark">HS</span><div><strong>Sourcing project brief</strong><small>ILLUSTRATIVE EXAMPLE · NOT A CLIENT CASE</small></div><span className="report-version">01</span></div><div className="report-title"><p>CUSTOM CNC-MACHINED HOUSING</p><h3>Requirements & comparison criteria</h3></div><div className="report-table"><div className="report-row"><span>Requirement</span><strong>Information to establish</strong></div>{[['Material','Grade & certification needs'],['Drawing','Revision, dimensions & tolerances'],['Production','Quantity, process & surface finish'],['Commercial','Tooling, lead time & quote basis'],['Next action','Resolve gaps before requesting samples']].map(([label,value])=><div className="report-row" key={label}><span>{label}</span><span>{value}</span></div>)}</div><div className="report-open"><span>OPEN POINT</span><p>Which dimensions are critical to fit and function?</p></div><p className="report-caption">Example structure only. Actual deliverables depend on the agreed scope.</p></div></div></section>
-
-  <section className="section shell field-section"><div className="section-top"><SectionIntro eyebrow="TECHNICAL SOURCING IN PRACTICE" title={<>Understand the part.<br/>Ask the manufacturing questions.</>} copy="Drawings, production methods and supplier documents all inform the sourcing brief. Understanding the application helps establish which capabilities and specifications matter."/><p className="photo-status">Illustrative manufacturing photography</p></div><div className="field-gallery"><figure><PhotoSlot number="10" label="Manufacturing environment or workshop"/><figcaption><span>01</span> Understanding the manufacturing context</figcaption></figure><figure><PhotoSlot number="11" label="Technical preparation & document review"/><figcaption><span>02</span> Reviewing drawings and technical specifications</figcaption></figure></div></section>
-
-  <section className="consultation shell"><div><p className="eyebrow">FREE 30-MINUTE SOURCING CONSULTATION</p><h2>Discuss your part.<br/>Define the sourcing support you need.</h2><p>Have a drawing, a replacement part reference or supplier quotations? Let’s discuss your requirement, the information still missing and the right scope of support.</p><a className="button" href={booking} target="_blank" rel="noopener noreferrer">Book a free 30-minute call <Arrow/></a><span className="call-reassurance">30 minutes · No obligation to proceed</span></div><div className="call-agenda"><span>YOUR FIRST CONVERSATION</span><h3>What we’ll discuss</h3><ol><li><span>01</span>The part, its application and quantity</li><li><span>02</span>Your specifications and existing suppliers</li><li><span>03</span>The next steps and possible project scope</li></ol><p>Prefer a message? <a href={whatsapp} target="_blank" rel="noopener noreferrer">Start on WhatsApp ↗</a></p></div></section>
-
-  <section id="faq" className="section shell faq-layout"><div><SectionIntro eyebrow="FREQUENTLY ASKED QUESTIONS" title={<>About sourcing<br/>industrial parts from China.</>}/><p>Something specific to your project?</p><a className="text-link" href={`mailto:${email}`}>Ask Hachim <Arrow/></a></div><div className="faq-list">{faqs.map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
-
-  <section id="enquiry" className="section contact-section"><div className="shell contact-layout"><div><SectionIntro eyebrow="DISCUSS YOUR PROJECT" title={<>Have a mechanical parts<br/>or industrial sourcing project?</>} copy="Share your requirements. After an initial review, I’ll outline the relevant support in a proposal covering deliverables, timeline, fee and responsibilities."/><div className="contact-direct"><a href={whatsapp} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/><span><small>WHATSAPP</small>+86 175 8987 9618</span><Arrow/></a><a href={`mailto:${email}`}><span className="email-icon">@</span><span><small>EMAIL</small>{email}</span><Arrow/></a></div><div className="brief-tip"><strong>Not ready with a full specification?</strong><p>A short description is enough to start. There’s no need to upload confidential drawings at this stage.</p></div></div><EnquiryForm/></div></section>
-
-  <section className="social-section shell"><div><p className="eyebrow">KEEP THE CONVERSATION GOING</p><h2>Connect with Hachim.</h2><p>For project enquiries, WhatsApp and email are the best place to start.</p></div><SocialLinks/></section>
- </main>
- <footer className="site-footer"><div className="shell"><div className="footer-top"><div><a className="brand" href="#main"><span className="brand-mark">HS</span>Hachim Souaiki</a><p>Mechanical parts sourcing from China.<br/>Supplier research, comparison & coordination.</p></div><div><h3>Explore</h3><a href="#expertise">What I source</a><a href="#services">Services</a><a href="#example">Sample deliverables</a></div><div><h3>Work together</h3><a href="#about">Meet Hachim</a><a href={booking} target="_blank" rel="noopener noreferrer">Free 30-minute call ↗</a><a href="#enquiry">Discuss a project</a></div><div><h3>Get in touch</h3><a href={`mailto:${email}`}>{email}</a><a href={whatsapp} target="_blank" rel="noopener noreferrer">+86 175 8987 9618 ↗</a><a href="/privacy/">Privacy Policy</a></div></div><div className="footer-bottom"><span>© 2026 Hachim Souaiki</span><span>MECHANICAL PARTS SOURCING · CHINA</span><a href="#main">Back to top ↑</a></div></div></footer>
- <CookieNotice/><WhatsAppWidget/>
- </>}
+export default function Home() {
+  return (
+    <main id="main">
+      <Hero/>
+      <SourcingBand/>
+      <ProjectNeeds/>
+      <ServiceOverview/>
+      <Evaluation/>
+      <Process/>
+      <WorkingTogether/>
+      <About/>
+      <SamplePreview/>
+      <section className="section tint">
+        <div className="container">
+          <div className="section-intro">
+            <p className="eyebrow">INSIGHTS</p>
+            <h2>Practical guides for sourcing from China.</h2>
+            <a className="text-link" href="/insights/">View all seven guides <Icon name="arrow-right"/></a>
+          </div>
+          <InsightCards limit={3} heading="h3"/>
+        </div>
+      </section>
+      <Faq/>
+      <Enquiry/>
+    </main>
+  );
+}

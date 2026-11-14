@@ -1,3 +1,17 @@
-"use client";
-import {useState} from 'react';
-export default function CookieNotice(){const [visible,setVisible]=useState(true);if(!visible)return null;return <aside className="cookie-banner" aria-label="Cookie information"><p>This website does not use analytics or advertising cookies. You can explore the website without enabling tracking. Read our <a href="/privacy">Privacy Policy</a> for more information.<span className="cookie-preview-label">No tracking is enabled · Your choice is not saved</span></p><div className="cookie-buttons"><button type="button" className="cookie-decline" onClick={()=>setVisible(false)}>Decline all</button><button type="button" className="cookie-accept" onClick={()=>setVisible(false)}>Accept all</button></div></aside>}
+'use client';
+
+import { useState } from 'react';
+
+export default function CookieNotice() {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
+
+  return (
+    <aside className="cookie-banner" aria-label="Cookie information">
+      <p>No tracking cookies. <a href="/privacy/">Privacy Policy</a></p>
+      <div className="cookie-buttons">
+        <button className="btn btn-primary btn-sm" type="button" onClick={() => setVisible(false)}>OK</button>
+      </div>
+    </aside>
+  );
+}
